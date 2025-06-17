@@ -1,0 +1,32 @@
+syntax = "v1"
+
+type RegisterReq {
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
+
+type RegisterResp {
+	Msg string `json:"msg"`
+}
+
+type LoginReq {
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
+
+type LoginResp {
+	Msg string `json:"msg"`
+}
+
+@server (
+	prefix: /api/v1
+	group:  account
+)
+service user-api {
+	@handler register
+	get /user/register (RegisterReq) returns (RegisterResp)
+
+	@handler login
+	get /user/login (LoginReq) returns (LoginResp)
+}
+
